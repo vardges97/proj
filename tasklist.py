@@ -1,31 +1,33 @@
 task_list = []
 
-def generate_id():
-    if not task_list:
-        return 1
-    return max(task['id'] for task in task_list) + 1
+# def generate_id():
+#     if not task_list:
+#         return 1
+#     return max(task['id'] for task in task_list) + 1
 
 def add_task():
+    task_id = input('please enter a task id: ')
     description = input('enter the name of the task: ')
     if not description:
         print('task description cant be empty')
         return
-    priority = ('')
-    priority == input("enter a priority for the task( low, medium, high): ").lower
-    if priority not in ('low,medium,high'):
+    prioritty = ('')
+    prioritty == input("enter a priority for the task( low, medium, high): ").lower
+    statuss="incomplet"
+    if prioritty not in ('low,medium,high'):
         print('invalid task must have priority')
         return
     task = {
-        'id':generate_id(),
+        'id':task_id,
         'description': description,
-        'compeletion': None,
-        'priority': priority
+        'compeletion': statuss,
+        'priority': prioritty
     }
     task_list.append(task)
     print('task added successfully')
 
 def remove_task():
-    task_id = int(input('please enter the task id which you want removed:'))
+    task_id = int(input('please enter the task id which you want removed: '))
     for task in task_list:
         task_id == task['id']
         task_list.remove(task)
@@ -39,32 +41,32 @@ def list_tasks():
         print('no such task found')
         return
     for task in task_list:
-        print(f"ID: {task['id']},Description: {task['description']},"
-             f"Status: {task["compeletion"]},")
+        print(f"ID: {task['id']},Description: {task['description']},Status: {task['compeletion']},Priority: {task['priority']}")
 
 def list_compeleted():
     if not task_list:
         print('to tasks found')
     for task in task_list:
-        if task['compeleted'] == compeleted:
+        if task['compeletion'] == 'compelete':
             print(f"ID: {task['id']},Description: {task['description']},"
-                f"Status: {task["compeletion"]},")
+                f"Status: {task["compeletion"]},{task['priority']}")
     print('task not in task list')
 
 
 def task_status():
-    task_id = input("please enter id of the task to change status")
+    task_id = input("please enter id of the task to change status: ")
+    status = input("enter status of the task: ")
     for task in task_list:
         if task['id'] == task_id:
-            task['compeleted'] = not task['completed']
+            task['compeletion'] = status
             print('task status updated')
             return
 
 
 
 def task_priority():
-    task_id = input('enter the if of the task to which you want to set priority')
-    priority = input("please enter the priority of the task(lwo,medium,high)").lower()
+    task_id = input('enter the if of the task to which you want to set priority: ')
+    priority = input("please enter the priority of the task(low,medium,high)").lower()
     for task in task_list:
         if task['id'] == task_id:
             if priority in('low','medium','high'):
